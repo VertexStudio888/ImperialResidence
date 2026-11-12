@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#050505">
+<title>Imobiliário | Nome da Empresa</title>
+<meta name="description" content="Moradias, apartamentos e terrenos para comprar, vender ou arrendar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a href="index.html" class="logo"><i><span>◆</span></i> Nome da Empresa</a>
+    <nav class="menu">
+      <a href="index.html">Início</a>
+      <a href="imobiliario.html" class="active">Imobiliário</a>
+      <a href="projetos.html">Projetos</a>
+      <a href="#contactos" class="cta">Contactos</a>
+    </nav>
+    <button class="burger" aria-label="Menu"><span></span></button>
+  </div>
+</header>
+
+<section class="hero page-hero" style="padding-bottom:130px">
+  <div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=2000&q=80')"></div>
+  <div class="wrap">
+    <span class="eyebrow">Imobiliário</span>
+    <h1>Encontre o lugar <em>certo</em>.</h1>
+    <p class="lead" style="margin-top:24px;color:rgba(255,255,255,.82)">Uma seleção cuidada de imóveis, com acompanhamento em todas as fases do negócio.</p>
+  </div>
+</section>
+
+<div class="search">
+  <div class="wrap">
+    <div class="search-box">
+      <div class="seg">
+        <button class="on" data-neg="comprar">Comprar</button>
+        <button data-neg="arrendar">Arrendar</button>
+      </div>
+      <div class="field"><label for="f-tipo">Tipo</label>
+        <select id="f-tipo"><option value="">Todos</option><option>Moradia</option><option>Apartamento</option><option>Terreno</option></select></div>
+      <div class="field"><label for="f-zona">Localização</label>
+        <select id="f-zona"><option value="">Todas</option></select></div>
+      <div class="field"><label for="f-quartos">Quartos</label>
+        <select id="f-quartos"><option value="">Todos</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option></select></div>
+      <div class="field"><label for="f-preco">Preço</label>
+        <select id="f-preco"></select></div>
+      <button class="btn btn-primary" id="search-btn">Pesquisar <span class="arr">→</span></button>
+    </div>
+  </div>
+</div>
+
+<section class="sec light" id="listings" style="margin-top:-64px;padding-top:0">
+  <div class="wrap">
+    <div class="listing-bar">
+      <div><span class="eyebrow" style="margin-top:100px">Portefólio</span><h2>Imóveis em <em>destaque</em></h2></div>
+      <span class="count" id="count"></span>
+    </div>
+    <div class="grid" id="grid"></div>
+    <p class="muted" style="margin-top:30px;font-size:.82rem">Imóveis apresentados a título de exemplo. Substituir pelos dados reais.</p>
+  </div>
+</section>
+
+<section class="sec light" id="contactos">
+  <div class="wrap contact">
+    <div class="rv">
+      <span class="eyebrow">Contactos</span>
+      <h2>Vamos <em>conversar</em>.</h2>
+      <p class="lead muted" style="margin-top:24px">Conte-nos o que procura. Respondemos em menos de 24 horas úteis.</p>
+      <ul>
+        <li><small>Email</small><span>geral@exemplo.pt</span></li>
+        <li><small>Telefone</small><span>+351 000 000 000</span></li>
+        <li><small>Morada</small><span>Rua Exemplo, 000<br>2900-000 Setúbal</span></li>
+        <li><small>Horário</small><span>Seg – Sex · 9h às 18h</span></li>
+      </ul>
+    </div>
+    <form class="rv d1" data-demo>
+      <div class="row">
+        <label>Nome<input type="text" required placeholder="O seu nome"></label>
+        <label>Telefone<input type="tel" placeholder="+351"></label>
+      </div>
+      <label>Email<input type="email" required placeholder="nome@email.com"></label>
+      <label>Assunto
+        <select><option>Comprar imóvel</option><option>Vender imóvel</option><option>Arrendar</option><option>Novo projeto</option><option>Outro</option></select>
+      </label>
+      <label>Mensagem<textarea placeholder="Como podemos ajudar?"></textarea></label>
+      <button class="btn btn-primary" type="submit" style="justify-self:start">Enviar mensagem <span class="arr">→</span></button>
+      <p class="form-ok">Obrigado! Entraremos em contacto em breve. (Formulário de demonstração.)</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div><a href="index.html" class="logo"><i><span>◆</span></i> Nome da Empresa</a><p>Imobiliário e projetos com visão contemporânea.</p></div>
+      <div><h4>Navegação</h4><a href="index.html">Início</a><a href="imobiliario.html">Imobiliário</a><a href="projetos.html">Projetos</a><a href="#contactos">Contactos</a></div>
+      <div><h4>Imobiliário</h4><a href="imobiliario.html">Comprar</a><a href="imobiliario.html">Arrendar</a><a href="imobiliario.html">Vender</a></div>
+      <div><h4>Contacto</h4><a href="mailto:geral@exemplo.pt">geral@exemplo.pt</a><a href="tel:+351000000000">+351 000 000 000</a><a href="#contactos">Setúbal, Portugal</a></div>
+    </div>
+    <div class="legal"><span>© 2026 Nome da Empresa. Todos os direitos reservados.</span><span>Política de privacidade · Livro de reclamações</span></div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

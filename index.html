@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#050505">
+<title>Imobiliário & Projetos | Nome da Empresa</title>
+<meta name="description" content="Imobiliário e projetos de arquitetura e construção, com um olhar contemporâneo e acompanhamento do início ao fim.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a href="index.html" class="logo"><i><span>◆</span></i> Nome da Empresa</a>
+    <nav class="menu">
+      <a href="index.html" class="active">Início</a>
+      <a href="imobiliario.html">Imobiliário</a>
+      <a href="projetos.html">Projetos</a>
+      <a href="#contactos" class="cta">Contactos</a>
+    </nav>
+    <button class="burger" aria-label="Menu"><span></span></button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2000&q=80')"></div>
+  <div class="wrap">
+    <div class="hero-foot">
+      <div>
+        <span class="eyebrow">Imobiliário · Projetos</span>
+        <h1>Espaços que <em>contam</em> a sua história.</h1>
+        <p class="lead">Do primeiro traço à entrega das chaves. Compramos, vendemos, projetamos e construímos com rigor, sensibilidade e visão de futuro.</p>
+        <div class="hero-actions">
+          <a href="imobiliario.html" class="btn btn-primary">Ver imóveis <span class="arr">→</span></a>
+          <a href="projetos.html" class="btn btn-line">Os nossos projetos</a>
+        </div>
+      </div>
+      <div class="scroll-cue">Descobrir</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec light" id="sobre">
+  <div class="wrap">
+  <div class="dark-card split">
+    <div class="rv">
+      <span class="eyebrow">Quem somos</span>
+      <h2>Uma visão <em>completa</em> do espaço onde vive e investe.</h2>
+      <p class="lead muted" style="margin-top:26px">Reunimos num só lugar a mediação imobiliária e o desenvolvimento de projetos. Isto significa um único interlocutor, decisões mais rápidas e um resultado coerente, da escolha do imóvel à obra concluída.</p>
+      <p class="lead muted" style="margin-top:18px">Trabalhamos de forma transparente, com acompanhamento personalizado e atenção a cada detalhe.</p>
+      <div style="margin-top:36px"><a href="#contactos" class="btn btn-line">Falar connosco <span class="arr">→</span></a></div>
+    </div>
+    <div class="img-frame rv d2">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80" alt="Interior contemporâneo">
+    </div>
+  </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="head rv">
+      <div><span class="eyebrow">Áreas de atuação</span><h2>Duas áreas, <em>uma</em> só exigência.</h2></div>
+    </div>
+    <div class="divisions">
+      <a href="imobiliario.html" class="division rv">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1400&q=80" alt="Imobiliário">
+        <span class="num">01</span><span class="go">↗</span>
+        <div><h3>Imobiliário</h3><p>Moradias, apartamentos e terrenos selecionados para comprar, vender ou arrendar.</p></div>
+      </a>
+      <a href="projetos.html" class="division rv d2">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=80" alt="Projetos">
+        <span class="num">02</span><span class="go">↗</span>
+        <div><h3>Projetos</h3><p>Arquitetura, design de interiores e construção, geridos de ponta a ponta.</p></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="sec light" id="contactos">
+  <div class="wrap contact">
+    <div class="rv">
+      <span class="eyebrow">Contactos</span>
+      <h2>Vamos <em>conversar</em>.</h2>
+      <p class="lead muted" style="margin-top:24px">Conte-nos o que procura. Respondemos em menos de 24 horas úteis.</p>
+      <ul>
+        <li><small>Email</small><span>geral@exemplo.pt</span></li>
+        <li><small>Telefone</small><span>+351 000 000 000</span></li>
+        <li><small>Morada</small><span>Rua Exemplo, 000<br>2900-000 Setúbal</span></li>
+        <li><small>Horário</small><span>Seg – Sex · 9h às 18h</span></li>
+      </ul>
+    </div>
+    <form class="rv d1" data-demo>
+      <div class="row">
+        <label>Nome<input type="text" required placeholder="O seu nome"></label>
+        <label>Telefone<input type="tel" placeholder="+351"></label>
+      </div>
+      <label>Email<input type="email" required placeholder="nome@email.com"></label>
+      <label>Assunto
+        <select><option>Comprar imóvel</option><option>Vender imóvel</option><option>Arrendar</option><option>Novo projeto</option><option>Outro</option></select>
+      </label>
+      <label>Mensagem<textarea placeholder="Como podemos ajudar?"></textarea></label>
+      <button class="btn btn-primary" type="submit" style="justify-self:start">Enviar mensagem <span class="arr">→</span></button>
+      <p class="form-ok">Obrigado! Entraremos em contacto em breve. (Formulário de demonstração.)</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div><a href="index.html" class="logo"><i><span>◆</span></i> Nome da Empresa</a><p>Imobiliário e projetos com visão contemporânea.</p></div>
+      <div><h4>Navegação</h4><a href="index.html">Início</a><a href="imobiliario.html">Imobiliário</a><a href="projetos.html">Projetos</a><a href="#contactos">Contactos</a></div>
+      <div><h4>Imobiliário</h4><a href="imobiliario.html">Comprar</a><a href="imobiliario.html">Arrendar</a><a href="imobiliario.html">Vender</a></div>
+      <div><h4>Contacto</h4><a href="mailto:geral@exemplo.pt">geral@exemplo.pt</a><a href="tel:+351000000000">+351 000 000 000</a><a href="#contactos">Setúbal, Portugal</a></div>
+    </div>
+    <div class="legal"><span>© 2026 Nome da Empresa. Todos os direitos reservados.</span><span>Política de privacidade · Livro de reclamações</span></div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
