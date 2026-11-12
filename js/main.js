@@ -48,7 +48,8 @@ document.querySelectorAll('form[data-demo]').forEach(f => f.addEventListener('su
 }));
 
 /* ===== Imobiliário: dados de exemplo + filtros ===== */
-const U = id => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1200&q=80`;
+const U = (id, w = 1200) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`;
+const SRCSET = id => [500, 800, 1200].map(w => `${U(id, w)} ${w}w`).join(', ');
 const IMOVEIS = [
   { t: 'Villa Horizonte', z: 'Cascais', tipo: 'Moradia', neg: 'comprar', p: 2450000, q: 5, a: 480, img: 'photo-1600596542815-ffad4c1539a9', tag: 'Destaque' },
   { t: 'Penthouse Atlântico', z: 'Lisboa', tipo: 'Apartamento', neg: 'comprar', p: 1280000, q: 3, a: 190, img: 'photo-1512917774080-9991f1c4c750', tag: 'Novo' },
@@ -81,7 +82,7 @@ if (grid) {
     grid.innerHTML = list.length ? list.map((i, n) => `
       <article class="card rv d${n % 3}">
         <div class="ph">
-          <img loading="lazy" src="${U(i.img)}" alt="${i.t}" />
+          <img loading="lazy" src="${U(i.img, 800)}" srcset="${SRCSET(i.img)}" sizes="(max-width:640px) 100vw,(max-width:1000px) 50vw,33vw" alt="${i.t}" />
           <span class="tag">${i.tag}</span>
           <button class="fav ${favs.has(i.t) ? 'on' : ''}" data-id="${i.t}" aria-label="Guardar">♥</button>
         </div>

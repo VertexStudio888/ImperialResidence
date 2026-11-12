@@ -80,7 +80,9 @@ em{font-style:italic;color:#bdbdbd}
    Hero
    ========================================================== */
 .hero{min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;padding:clamp(110px,16vw,140px) 0 clamp(44px,8vw,70px);overflow:hidden;isolation:isolate}
-.hero-bg{position:absolute;inset:0;z-index:-2;background:#1a1a1a center/cover no-repeat;transform:scale(1.08);animation:zoom 18s var(--ease) forwards}
+.hero-bg{position:absolute;inset:0;z-index:-2;background:#1a1a1a center/cover no-repeat;background-image:var(--bg-sm);transform:scale(1.08);animation:zoom 18s var(--ease) forwards}
+/* Imagem de fundo leve em telemóvel, grande só a partir de tablet (o browser só descarrega a que se aplica) */
+@media(min-width:700px){.hero-bg{background-image:var(--bg-lg,var(--bg-sm))}}
 @keyframes zoom{to{transform:scale(1)}}
 .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(5,5,5,.6) 0%,rgba(5,5,5,.3) 40%,rgba(5,5,5,.94) 100%)}
 .hero h1{max-width:14ch}
