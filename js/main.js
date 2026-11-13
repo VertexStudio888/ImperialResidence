@@ -47,25 +47,10 @@ document.querySelectorAll('form[data-demo]').forEach(f => f.addEventListener('su
   f.reset();
 }));
 
-/* ===== Imobiliário: dados de exemplo + filtros ===== */
-const U = (id, w = 1200) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`;
-const SRCSET = id => [500, 800, 1200].map(w => `${U(id, w)} ${w}w`).join(', ');
-const IMOVEIS = [
-  { t: 'Villa Horizonte', z: 'Cascais', tipo: 'Moradia', neg: 'comprar', p: 2450000, q: 5, a: 480, img: 'photo-1600596542815-ffad4c1539a9', tag: 'Destaque' },
-  { t: 'Penthouse Atlântico', z: 'Lisboa', tipo: 'Apartamento', neg: 'comprar', p: 1280000, q: 3, a: 190, img: 'photo-1512917774080-9991f1c4c750', tag: 'Novo' },
-  { t: 'Casa do Pátio', z: 'Comporta', tipo: 'Moradia', neg: 'comprar', p: 1890000, q: 4, a: 320, img: 'photo-1600585154340-be6161a56a0c', tag: 'Exclusivo' },
-  { t: 'Loft Ribeira', z: 'Porto', tipo: 'Apartamento', neg: 'comprar', p: 465000, q: 2, a: 110, img: 'photo-1560448204-e02f11c3d0e2', tag: 'Novo' },
-  { t: 'Residência Serra', z: 'Sintra', tipo: 'Moradia', neg: 'comprar', p: 980000, q: 4, a: 290, img: 'photo-1564013799919-ab600027ffc6', tag: 'Venda' },
-  { t: 'Terraço do Chiado', z: 'Lisboa', tipo: 'Apartamento', neg: 'arrendar', p: 3200, q: 2, a: 140, img: 'photo-1522708323590-d24dbb6b0267', tag: 'Arrendamento' },
-  { t: 'Quinta Alvorada', z: 'Setúbal', tipo: 'Moradia', neg: 'comprar', p: 1350000, q: 6, a: 560, img: 'photo-1613490493576-7fde63acd811', tag: 'Destaque' },
-  { t: 'Studio Marina', z: 'Cascais', tipo: 'Apartamento', neg: 'arrendar', p: 1850, q: 1, a: 62, img: 'photo-1505691938895-1758d7feb511', tag: 'Arrendamento' },
-  { t: 'Lote Vista Rio', z: 'Setúbal', tipo: 'Terreno', neg: 'comprar', p: 390000, q: 0, a: 1200, img: 'photo-1600607687939-ce8a6c25118c', tag: 'Terreno' },
-];
+/* ===== Imobiliário: filtros (os dados estão em js/imoveis.js) ===== */
 const grid = document.getElementById('grid');
 if (grid) {
   const state = { neg: 'comprar', tipo: '', zona: '', quartos: '', preco: '' };
-  const eur = n => n.toLocaleString('pt-PT') + ' €';
-  const favs = new Set(JSON.parse(localStorage.getItem('favs') || '[]'));
 
   // preencher zonas
   const zonaSel = document.getElementById('f-zona');
@@ -79,23 +64,7 @@ if (grid) {
       (!state.quartos || i.q >= +state.quartos) &&
       (!state.preco || i.p <= +state.preco));
     document.getElementById('count').textContent = `${list.length} ${list.length === 1 ? 'imóvel encontrado' : 'imóveis encontrados'}`;
-    grid.innerHTML = list.length ? list.map((i, n) => `
-      <article class="card rv d${n % 3}">
-        <div class="ph">
-          <img loading="lazy" src="${U(i.img, 800)}" srcset="${SRCSET(i.img)}" sizes="(max-width:640px) 100vw,(max-width:1000px) 50vw,33vw" alt="${i.t}" />
-          <span class="tag">${i.tag}</span>
-          <button class="fav ${favs.has(i.t) ? 'on' : ''}" data-id="${i.t}" aria-label="Guardar">♥</button>
-        </div>
-        <div class="body">
-          <span class="loc">${i.z} · ${i.tipo}</span>
-          <h3>${i.t}</h3>
-          <div class="price">${eur(i.p)}${i.neg === 'arrendar' ? ' <small style="font-size:.5em">/mês</small>' : ''}</div>
-          <div class="specs">
-            ${i.q ? `<span><b>${i.q}</b> quartos</span>` : ''}
-            <span><b>${i.a}</b> m²</span>
-          </div>
-        </div>
-      </article>`).join('') : '<div class="empty">Sem resultados para estes filtros. Tente alargar a pesquisa.</div>';
+    grid.innerHTML = list.length ? list.map((i, n) => cardHTML(i, n)).join('') : '<div class="empty">Sem resultados para estes filtros. Tente alargar a pesquisa.</div>';
     observeReveal();
   };
 
@@ -116,13 +85,6 @@ if (grid) {
   }
   updatePrices();
 
-  grid.addEventListener('click', e => {
-    const b = e.target.closest('.fav'); if (!b) return;
-    const id = b.dataset.id;
-    favs.has(id) ? favs.delete(id) : favs.add(id);
-    b.classList.toggle('on');
-    try { localStorage.setItem('favs', JSON.stringify([...favs])); } catch (_) {}
-  });
   document.getElementById('search-btn')?.addEventListener('click', () => document.getElementById('listings').scrollIntoView({ behavior: 'smooth' }));
   render();
 }
@@ -134,3 +96,86 @@ document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () =
   const f = c.dataset.f;
   document.querySelectorAll('.work').forEach(w => w.classList.toggle('hide', f !== 'all' && w.dataset.c !== f));
 }));
+
+/* ===== Seletor de idioma (bandeiras) + tradução do site =====
+   O seletor é inserido no cabeçalho de todas as páginas. Ao escolher uma bandeira, o site é traduzido para
+   esse idioma com o motor próprio (js/lang.js + js/lang-ui.js + js/lang-imoveis.js), que só é descarregado
+   quando se escolhe um idioma diferente de português. A escolha fica guardada e é aplicada nas outras páginas.
+   O conteúdo criado depois (filtros, cartões de imóveis) é traduzido automaticamente. */
+(() => {
+  const BASE = 'pt';
+  const LANGS = [                       // [código, nome, país da bandeira]
+    ['es', 'Español', 'es'], ['en', 'English', 'gb'], ['fr', 'Français', 'fr'], ['de', 'Deutsch', 'de'],
+    ['it', 'Italiano', 'it'], ['pt', 'Português', 'pt'], ['uk', 'Українська', 'ua'], ['da', 'Dansk', 'dk'],
+  ];
+  const flagUrl = cc => `https://flagcdn.com/w80/${cc}.png`;
+  const bar = document.querySelector('.nav .wrap');
+  if (!bar) return;
+  const dir = document.currentScript ? document.currentScript.src.replace(/[^/]*$/, '') : 'js/';   // pasta deste ficheiro
+
+  let current = BASE;
+  try { current = localStorage.getItem('lang') || BASE; } catch (_) {}
+  if (!LANGS.some(l => l[0] === current)) current = BASE;
+
+  const box = document.createElement('div');
+  box.className = 'lang notranslate';
+  box.setAttribute('translate', 'no');
+  box.innerHTML = `
+    <button type="button" class="lang-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Idioma / Language">
+      <img class="lang-flag" alt="" width="28" height="20"><span class="lang-caret" aria-hidden="true"></span>
+    </button>
+    <ul class="lang-list" role="listbox" aria-label="Idioma">
+      ${LANGS.map(([c, n, cc]) => `<li role="option" tabindex="0" data-lang="${c}"><img src="${flagUrl(cc)}" alt="" width="36" height="24" loading="lazy"><span>${n}</span><svg class="tick" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg></li>`).join('')}
+    </ul>`;
+  bar.insertBefore(box, bar.querySelector('.burger'));
+
+  const btn = box.querySelector('.lang-btn');
+  const flagImg = box.querySelector('.lang-flag');
+  const items = [...box.querySelectorAll('li')];
+
+  const paint = () => {
+    const [, name, cc] = LANGS.find(l => l[0] === current);
+    flagImg.src = flagUrl(cc);
+    flagImg.alt = name;
+    items.forEach(li => li.setAttribute('aria-selected', String(li.dataset.lang === current)));
+  };
+  const setOpen = open => {
+    box.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', String(open));
+  };
+
+  // --- tradução ---
+  const loadScript = src => new Promise(done => {
+    const s = document.createElement('script');
+    s.src = src; s.async = true; s.onload = s.onerror = () => done();
+    document.head.appendChild(s);
+  });
+  let engine = null;
+  const getEngine = () => engine || (engine = Promise
+    .all(['lang.js', 'lang-ui.js', 'lang-imoveis.js'].map(f => loadScript(dir + f)))
+    .then(() => window.I18N));
+  const apply = lang => getEngine().then(e => { if (e && current === lang) e.set(lang); });
+
+  // limpa o cookie do antigo widget do Google Tradutor, se existir
+  try { document.cookie = 'googtrans=;path=/;expires=Thu, 01 Jan 1970 00:00:00 GMT'; } catch (_) {}
+
+  const choose = lang => {
+    current = lang;
+    paint();
+    setOpen(false);
+    try { if (lang === BASE) localStorage.removeItem('lang'); else localStorage.setItem('lang', lang); } catch (_) {}
+    if (lang === BASE && !engine) return;          // a página ainda está em português: nada a repor
+    apply(lang);
+  };
+
+  btn.addEventListener('click', () => setOpen(!box.classList.contains('open')));
+  items.forEach(li => {
+    li.addEventListener('click', () => choose(li.dataset.lang));
+    li.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); choose(li.dataset.lang); } });
+  });
+  document.addEventListener('click', e => { if (!box.contains(e.target)) setOpen(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+
+  paint();
+  if (current !== BASE) apply(current);            // mantém o idioma ao mudar de página
+})();
