@@ -7,6 +7,11 @@
 const U = (id, w = 1200) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`;
 const SRCSET = id => [500, 800, 1200].map(w => `${U(id, w)} ${w}w`).join(', ');
 const eur = n => n.toLocaleString('pt-PT') + ' €';
+// Distrito de cada zona (mostrado por baixo do preço: "Zona, Distrito"). Para uma zona nova, acrescente-a aqui
+// ou defina o campo d no imóvel (ex.: z: 'Barreiro', d: 'Setúbal').
+const DISTRITO = { Cascais: 'Lisboa', Sintra: 'Lisboa', Lisboa: 'Lisboa', Comporta: 'Setúbal', Barreiro: 'Setúbal', Setúbal: 'Setúbal', Porto: 'Porto' };
+const PIN = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>';
+const localHTML = i => { const d = i.d || DISTRITO[i.z]; return `<span>${i.z}</span>${d && d !== i.z ? `, <span>${d}</span>` : ''}`; };
 
 const IMOVEIS = [
   { id: 'villa-horizonte', ref: 'IR-1001', t: 'Villa Horizonte', z: 'Cascais', tipo: 'Moradia', neg: 'comprar', p: 2450000, q: 5, a: 480, img: 'photo-1600596542815-ffad4c1539a9',
@@ -65,12 +70,14 @@ IMOVEIS.forEach((x, n) => {
 const cardHTML = (i, n = 0) => `
   <a href="imoveis_paginas/imovel-${i.id}.html" class="card rv d${n % 3}">
     <div class="ph">
+      <span class="tag${i.neg === 'arrendar' ? ' rent' : ''}">${i.neg === 'arrendar' ? 'Arrendamento' : 'Venda'}</span>
       <img loading="lazy" src="${U(i.img, 800)}" srcset="${SRCSET(i.img)}" sizes="(max-width:640px) 100vw,(max-width:1000px) 50vw,33vw" alt="${i.t}" />
     </div>
     <div class="body">
-      <span class="loc">${i.z} · ${i.tipo}</span>
+      <span class="loc">${i.tipo}</span>
       <h3>${i.t}</h3>
-      <div class="price">${eur(i.p)}${i.neg === 'arrendar' ? ' <small style="font-size:.5em">/mês</small>' : ''}</div>
+      <div class="price">${eur(i.p)}${i.neg === 'arrendar' ? ' <small>/mês</small>' : ''}</div>
+      <div class="where">${PIN}<div>${localHTML(i)}</div></div>
       <div class="specs">
         ${i.q ? `<span><b>${i.q}</b> quartos</span>` : ''}
         <span><b>${i.a}</b> m²</span>

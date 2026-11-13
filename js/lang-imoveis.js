@@ -6,6 +6,8 @@
   ['Moradia', 'Casa', 'House', 'Maison', 'Haus', 'Casa', 'Будинок', 'Hus'],
   ['Apartamento', 'Apartamento', 'Apartment', 'Appartement', 'Wohnung', 'Appartamento', 'Квартира', 'Lejlighed'],
   ['Terreno', 'Terreno', 'Land', 'Terrain', 'Grundstück', 'Terreno', 'Земельна ділянка', 'Grund'],
+  ['Venda', 'Venta', 'For sale', 'À vendre', 'Zu verkaufen', 'In vendita', 'Продаж', 'Til salg'],
+  ['Arrendamento', 'Alquiler', 'For rent', 'À louer', 'Zu vermieten', 'In affitto', 'Оренда', 'Til leje'],
 
   /* --- localidades --- */
   ['Cascais', 'Cascais', 'Cascais', 'Cascais', 'Cascais', 'Cascais', 'Кашкайш', 'Cascais'],

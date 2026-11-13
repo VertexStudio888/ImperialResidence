@@ -158,13 +158,17 @@ em{font-style:normal;color:inherit}
 .card .ph{position:relative;aspect-ratio:4/3;overflow:hidden;background:#d9d9d9}
 .card .ph img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
 .card:hover .ph img{transform:scale(1.08)}
-.tag{position:absolute;top:16px;left:16px;background:#050505;color:#fff;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;padding:8px 14px;border-radius:999px}
+.tag{position:absolute;top:16px;left:16px;z-index:1;background:#050505;color:#fff;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;padding:8px 14px;border-radius:999px}
+.tag.rent{background:#fff;color:#050505}
 .fav{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.95);display:grid;place-items:center;color:#050505;transition:.3s}
 .fav.on{background:#050505;color:#fff}
 .card .body{padding:24px 26px 26px;display:flex;flex-direction:column;gap:6px;flex:1}
-.card .loc{font-size:.8rem;color:var(--paper-muted);letter-spacing:.04em}
+.card .loc{font-size:.7rem;color:var(--paper-muted);letter-spacing:.16em;text-transform:uppercase;font-weight:500}
 .card h3{font-size:1.4rem;color:var(--paper-ink)}
-.card .price{font-family:var(--display);font-size:1.7rem;color:var(--paper-ink);margin:6px 0 14px}
+.card .price{font-family:var(--sans);font-size:1.55rem;font-weight:600;letter-spacing:-.025em;line-height:1.15;font-variant-numeric:lining-nums tabular-nums;color:var(--paper-ink);margin:8px 0 6px}
+.card .price small{font-size:.55em;font-weight:500;letter-spacing:0;color:var(--paper-muted)}
+.card .where{display:flex;align-items:flex-start;gap:7px;margin:0 0 16px;font-size:.88rem;font-weight:500;line-height:1.4;color:var(--paper-muted)}
+.card .where svg{flex:none;margin-top:3px;color:var(--paper-ink)}
 .card .specs{display:flex;gap:18px;padding-top:16px;border-top:1px solid var(--paper-line);font-size:.85rem;color:var(--paper-muted);margin-top:auto}
 .card .specs b{color:var(--paper-ink);font-weight:600}
 .empty{grid-column:1/-1;text-align:center;padding:80px 0;color:var(--paper-muted)}
